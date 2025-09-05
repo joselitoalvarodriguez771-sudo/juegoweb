@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Juego de Inteligencia</title>
+  <style>
+    :root {
+      --color-fondo: #0f0f2f;
+      --color-acento: #00ffe0;
+      --color-texto: #ffffff;
+      --color-boton: #1f1f3f;
+      --color-hover: #00ffe0;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding: 30px;
+      margin: 0;
+      background-color: var(--color-fondo);
+      background-image: url('imagenes/fondosiguiente.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: var(--color-texto);
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 30px;
+      text-shadow: 0 0 10px var(--color-acento);
+    }
+
+    #pregunta {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.4);
+      border-radius: 10px;
+      box-shadow: 0 0 10px var(--color-acento);
+    }
+
+    #opciones {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    button {
+      padding: 12px 24px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      background-color: var(--color-boton);
+      color: var(--color-texto);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 5px var(--color-acento);
+    }
+
+    button:hover {
+      background-color: var(--color-hover);
+      color: #000;
+      box-shadow: 0 0 15px var(--color-hover);
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5em;
+      }
+
+      #pregunta {
+        font-size: 1.2em;
+      }
+
+      button {
+        font-size: 0.9em;
+        padding: 10px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🧠 Juego de Inteligencia</h1>
+  <div id="pregunta"></div>
+  <div id="opciones"></div>
+  <button onclick="nuevaPregunta()">Siguiente pregunta</button>
+
+  <script>
+    const preguntas = [
+      { pregunta: "¿Cuál es la ciudad de la primavera?", opciones: ["La Libertad", "Chiclayo", "Trujillo"], correcta: "Trujillo" },
+      { pregunta: "¿Qué batalla fue decisiva para la independencia del Perú y se libró en 1824?", opciones: ["Batalla de Miraflores", "Batalla de Junín", "Batalla de Ayacucho"], correcta: "Batalla de Ayacucho" },
+      { pregunta: "¿Qué cultura preincaica es conocida por sus geoglifos en el desierto?", opciones: ["Chavín", "Nazca", "Mochica"], correcta: "Nazca" },
+      { pregunta: "¿Cuál fue el nombre original de Lima en la época colonial?", opciones: ["Ciudad de los Reyes", "Villa Rica de Oropesa", "Nueva Castilla"], correcta: "Ciudad de los Reyes" },
+      { pregunta: "¿Cuál es la moneda oficial del Perú?", opciones: ["sol", "nuevo sol", "sol peruano"], correcta: "sol" },
+      { pregunta: "¿Cuál es la capital del Imperio Inca?", opciones: ["Cusco", "Machu Picchu", "Cajamarca"], correcta: "Cusco" },
+      { pregunta: "¿Qué río cruza la selva peruana?", opciones: ["Amazonas", "Marañón", "Mantaro"], correcta: "Amazonas" },
+      { pregunta: "¿Quién escribió 'Los ríos profundos'?", opciones: ["Mario Vargas Llosa", "José María Arguedas", "César Vallejo"], correcta: "José María Arguedas" },
+      { pregunta: "¿En qué año se independizó el Perú?", opciones: ["1821", "1824", "1810"], correcta: "1821" },
+      { pregunta: "¿Cuál fue el Inca que murió al final?", opciones: ["Túpac Amaru", "Pachacútec", "Atahualpa"], correcta: "Túpac Amaru" }
+    ];
+
+    function nuevaPregunta() {
+      const aleatoria = preguntas[Math.floor(Math.random() * preguntas.length)];
+      document.getElementById("pregunta").textContent = aleatoria.pregunta;
+      const opcionesDiv = document.getElementById("opciones");
+      opcionesDiv.innerHTML = "";
+      aleatoria.opciones.forEach(op => {
+        const btn = document.createElement("button");
+        btn.textContent = op;
+        btn.onclick = () => {
+          alert(op === aleatoria.correcta ? "✅ ¡Correcto!" : "❌ Incorrecto");
+        };
+        opcionesDiv.appendChild(btn);
+      });
+    }
+
+    nuevaPregunta();
+  </script>
+
+</body>
+</html>

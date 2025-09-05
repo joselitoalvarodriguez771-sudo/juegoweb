@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Juego de la Suerte</title>
+  <style>
+    :root {
+      --fondo: #0f0f2f;
+      --acento: #00ffe0;
+      --texto: #ffffff;
+      --cuadro: #1f1f3f;
+      --ganador: #00ff88;
+      --perdedor: #ff4d4d;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      background-color: var(--fondo);
+      background-image: url('imagenes/fondosiguiente.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      padding: 30px;
+      margin: 0;
+      color: var(--texto);
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px var(--acento);
+    }
+
+    .cuadros {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      max-width: 360px;
+      margin: auto;
+    }
+
+    .cuadro {
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      background: var(--cuadro);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2em;
+      border-radius: 10px;
+      box-shadow: 0 0 10px var(--acento);
+      transition: background 0.3s, transform 0.2s;
+      color: var(--texto);
+    }
+
+    .cuadro:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 15px var(--acento);
+    }
+
+    #reiniciar {
+      margin-top: 30px;
+      padding: 12px 24px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      background-color: var(--cuadro);
+      color: var(--texto);
+      cursor: pointer;
+      box-shadow: 0 0 10px var(--acento);
+      display: none;
+      transition: background 0.3s;
+    }
+
+    #reiniciar:hover {
+      background-color: var(--acento);
+      color: #000;
+      box-shadow: 0 0 20px var(--acento);
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5em;
+      }
+      .cuadro {
+        font-size: 1em;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🎲 Juego de la Suerte</h1>
+  <div class="cuadros" id="cuadros"></div>
+  <button id="reiniciar" onclick="generarCuadros()">🔁 Empezar de nuevo</button>
+
+  <script>
+    let juegoTerminado = false;
+
+    function generarCuadros() {
+      const contenedor = document.getElementById("cuadros");
+      const boton = document.getElementById("reiniciar");
+      contenedor.innerHTML = "";
+      boton.style.display = "none";
+      juegoTerminado = false;
+
+      const ganador = Math.floor(Math.random() * 9);
+      for (let i = 0; i < 9; i++) {
+        const div = document.createElement("div");
+        div.className = "cuadro";
+        div.onclick = () => {
+          if (juegoTerminado) return;
+
+          if (i === ganador) {
+            div.textContent = "¡Ganaste! 😁";
+            div.style.background = "var(--ganador)";
+            juegoTerminado = true;
+            boton.style.display = "inline-block";
+          } else {
+            div.textContent = "😢";
+            div.style.background = "var(--perdedor)";
+          }
+        };
+        contenedor.appendChild(div);
+      }
+    }
+
+    generarCuadros();
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Selecciona un juego</title>
+  <style>
+    :root {
+      --fondo: #0f0f2f;
+      --acento: #00ffe0;
+      --texto: #ffffff;
+      --hover: #00ff88;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--fondo);
+      background-image: url('imagenes/fondoinicio.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      text-align: center;
+      margin: 0;
+      padding: 30px;
+      color: var(--texto);
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-top: 40px;
+      text-shadow: 0 0 10px var(--acento);
+    }
+
+    .game-selection {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      margin-top: 50px;
+    }
+
+    .game-selection img {
+      width: 200px;
+      height: 200px;
+      cursor: pointer;
+      border-radius: 15px;
+      transition: transform 0.3s, box-shadow 0.3s;
+      box-shadow: 0 0 15px var(--acento);
+      border: 2px solid transparent;
+    }
+
+    .game-selection img:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 25px var(--hover);
+      border-color: var(--hover);
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5em;
+      }
+
+      .game-selection img {
+        width: 150px;
+        height: 150px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🚀 Selecciona un juego</h1>
+
+  <div class="game-selection">
+    <img src="imagenes/catito.jpg" alt="Juego de la suerte" onclick="startGame(1)">
+    <img src="imagenes/tigres.jpg" alt="Juego de inteligencia" onclick="startGame(2)">
+  </div>
+
+  <script>
+    function startGame(gameNumber) {
+      switch (gameNumber) {
+        case 1:
+          window.location.href = "suerte.html";
+          break;
+        case 2:
+          window.location.href = "inteligencia.html";
+          break;
+        default:
+          alert("Selecciona un juego válido.");
+      }
+    }
+  </script>
+
+</body>
+</html>

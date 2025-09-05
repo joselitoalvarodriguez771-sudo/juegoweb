@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Acceso protegido</title>
+  <style>
+    :root {
+      --fondo: #0f0f2f;
+      --acento: #00ffe0;
+      --texto: #ffffff;
+      --error: #ff4d4d;
+      --boton: #1f1f3f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: var(--fondo);
+      background-image: url('imagenes/acceso.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      color: var(--texto);
+      text-align: center;
+      margin: 0;
+      padding: 30px;
+    }
+
+    h1 {
+      font-size: 2em;
+      margin-bottom: 20px;
+      text-shadow: 0 0 10px var(--acento);
+    }
+
+    p {
+      font-size: 1.1em;
+      margin-bottom: 20px;
+    }
+
+    #login, #bienvenida {
+      margin-top: 80px;
+      background-color: rgba(0, 0, 0, 0.5);
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: 0 0 20px var(--acento);
+    }
+
+    input[type="password"] {
+      padding: 12px;
+      font-size: 1em;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+      width: 80%;
+      max-width: 300px;
+      background-color: #333;
+      color: var(--texto);
+      box-shadow: 0 0 10px var(--acento);
+    }
+
+    button, .boton {
+      padding: 12px 24px;
+      font-size: 1em;
+      cursor: pointer;
+      border-radius: 8px;
+      border: none;
+      background-color: var(--boton);
+      color: var(--texto);
+      text-decoration: none;
+      margin-top: 20px;
+      box-shadow: 0 0 10px var(--acento);
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+
+    button:hover, .boton:hover {
+      background-color: var(--acento);
+      color: #000;
+      box-shadow: 0 0 20px var(--acento);
+    }
+
+    #error {
+      color: var(--error);
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    #jugar {
+      display: none;
+    }
+
+    @media (max-width: 600px) {
+      h1 {
+        font-size: 1.5em;
+      }
+
+      input[type="password"] {
+        font-size: 0.9em;
+      }
+
+      button, .boton {
+        font-size: 0.9em;
+        padding: 10px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="login">
+    <h1>🔐 Acceso protegido</h1>
+    <p>Ingresa la contraseña para continuar:</p>
+    <input type="password" id="clave" placeholder="Contraseña">
+    <button onclick="verificar()">Entrar</button>
+    <p id="error"></p>
+  </div>
+
+  <div id="bienvenida" style="display: none;">
+    <h1>🎉 Bienvenido</h1>
+    <p>Aquí comienza tu nueva aventura</p>
+    <a href="segunda.html" id="jugar" class="boton">🚀 Comenzar</a>
+  </div>
+
+  <script>
+    const contraseñaCorrecta = "sujeyjoselito*";
+
+    function verificar() {
+      const clave = document.getElementById("clave").value;
+      if (clave === contraseñaCorrecta) {
+        document.getElementById("login").style.display = "none";
+        document.getElementById("bienvenida").style.display = "block";
+        document.getElementById("jugar").style.display = "inline-block";
+      } else {
+        document.getElementById("error").textContent = "Contraseña incorrecta.";
+      }
+    }
+  </script>
+
+</body>
+</html>
