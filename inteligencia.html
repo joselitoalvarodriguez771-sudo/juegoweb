@@ -70,6 +70,16 @@
       box-shadow: 0 0 15px var(--color-hover);
     }
 
+    #mensaje-orientacion {
+      display: none;
+      background-color: rgba(255, 0, 0, 0.7);
+      color: white;
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
     @media (max-width: 600px) {
       h1 {
         font-size: 1.5em;
@@ -89,6 +99,7 @@
 <body>
 
   <h1>🧠 Juego de Inteligencia</h1>
+  <div id="mensaje-orientacion">🔄 Gira tu celular para una mejor experiencia en horizontal</div>
   <div id="pregunta"></div>
   <div id="opciones"></div>
   <button onclick="nuevaPregunta()">Siguiente pregunta</button>
@@ -122,9 +133,32 @@
       });
     }
 
-    nuevaPregunta();
+    function esMovil() {
+      return /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile/i.test(navigator.userAgent);
+    }
+
+    function sugerirOrientacion() {
+      if (esMovil()) {
+        if (screen.orientation && screen.orientation.lock) {
+          screen.orientation.lock("landscape").catch(() => {});
+        }
+
+        if (window.innerHeight > window.innerWidth) {
+          document.getElementById("mensaje-orientacion").style.display = "block";
+        }
+      }
+    }
+
+    window.addEventListener("load", () => {
+      sugerirOrientacion();
+      nuevaPregunta();
+    });
+
+    window.addEventListener("orientationchange", () => {
+      document.getElementById("mensaje-orientacion").style.display =
+        window.innerHeight > window.innerWidth ? "block" : "none";
+    });
   </script>
 
 </body>
-
 </html>
